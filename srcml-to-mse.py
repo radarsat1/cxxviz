@@ -3,8 +3,17 @@
 from lxml import etree
 import sys, os, bz2
 
-input_filename = 'siconos-srcml.xml.bz2'
-output_filename = 'siconos-srcml.mse.bz2'
+if len(sys.argv) < 2:
+    input_filename = 'siconos-srcml.xml.bz2'
+    output_filename = 'siconos-srcml.mse.bz2'
+else:
+    input_filename = sys.argv[1]
+    ext = os.path.splitext(input_filename)
+    if ext[1] in ['.bz2', '.gzip']:
+        output_filename = os.path.splitext(ext[0])[0]
+    else:
+        output_filename = ext[0]
+    output_filename += '.mse.bz2'
 
 print('Loading',input_filename,'...')
 tree = etree.parse(bz2.BZ2File(input_filename))
