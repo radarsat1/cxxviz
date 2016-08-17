@@ -28,3 +28,6 @@ where `filename.xml.bz2` is the output of running
 
 Stephen Sinclair <stephen.sinclair@inria.cl>
 
+# Copyright
+
+Apache 2.0.  See COPYING.md for more information.
