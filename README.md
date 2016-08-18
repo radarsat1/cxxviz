@@ -21,8 +21,12 @@ Usage:
 ~~~
 
 where `filename.xml.bz2` is the output of running
-[SrcML](http://www.srcml.org/) on a C++ tarball.
+[SrcML](http://www.srcml.org/) on a C++ tarball.  (I use `bz2` to the
+output after running SrcML, but you don't have to.)
 
+### Dependencies
+
+Requires Python 3 and `lxml` to be installed.
 
 # Author
 
