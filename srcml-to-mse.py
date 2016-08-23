@@ -28,12 +28,16 @@ else:
     ext = os.path.splitext(input_filename)
     if ext[1] in ['.bz2', '.gzip']:
         output_filename = os.path.splitext(ext[0])[0]
+        bz = bz2.BZ2File
+        bzext = '.bz2'
     else:
         output_filename = ext[0]
-    output_filename += '.mse.bz2'
+        bz = open
+        bzext = ''
+    output_filename += '.mse' + bzext
 
 print('Loading',input_filename,'...')
-tree = etree.parse(bz2.BZ2File(input_filename))
+tree = etree.parse(bz(input_filename))
 
 ns = {'src': u'http://www.srcML.org/srcML/src',
       'cpp': u'http://www.srcML.org/srcML/cpp'}
@@ -536,7 +540,7 @@ if calls:
 print('Found',len(invocations),'invocations')
 
 # Print MSE to output file
-output_file = bz2.BZ2File(output_filename, 'w') # open(output_filename, 'wb')
+output_file = bz(output_filename, 'w')
 output_file.write(bytes(u'(\n', 'UTF-8'))
 for n in nodes:
     output_file.write(bytes(n.to_mse(), 'UTF-8'))
