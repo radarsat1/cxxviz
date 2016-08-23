@@ -35,7 +35,14 @@ The first element in the MSE output is called the "Package".  You can
 specify the package name using the command-line option "--package":
 
 ~~~
-./srcml-to-mse.py <filename.xml.bz2> --package <package name>
+$ ./srcml-to-mse.py <filename.xml.bz2> --package <package name>
+~~~
+
+To get a feel for the format, try comparing the included example SrcML output to the generated MSE:
+
+~~~
+$ ./srcml-to-mse.py example.xml
+$ cat example.mse
 ~~~
 
 ### Dependencies
