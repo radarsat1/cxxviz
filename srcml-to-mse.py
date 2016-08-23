@@ -14,6 +14,8 @@
 #     License for the specific language governing permissions and limitations
 #     under the License.
 
+from __future__ import print_function, unicode_literals
+from builtins import bytes
 
 from lxml import etree
 import sys, os, bz2
