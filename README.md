@@ -35,7 +35,15 @@ $ easy_install --upgrade --user .
 ~~~
 
 This should read `setup.py` and install the `lxml` and `future`
-packages for you.
+packages for you.  You should then run the script, specifying Python
+manually:
+
+~~~
+$ python srcml-to-mse.py <filename.xml.bz2>
+~~~
+
+Note, the use of bzip2 to make the SrcML output a bit smaller is
+optional.  If used, the MSE output will also be compressed.
 
 # Author
 
