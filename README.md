@@ -24,6 +24,20 @@ where `filename.xml.bz2` is the output of running
 [SrcML](http://www.srcml.org/) on a C++ tarball.  (I use `bz2` to the
 output after running SrcML, but you don't have to.)
 
+### About the MSE output
+
+The MSE output is a format that can be used to make visualisations
+using Moose.  The script contains a small set of classes for
+generating this representation.  In its current form it's not very
+reusable, however this may be better modularised in the future.
+
+The first element in the MSE output is called the "Package".  You can
+specify the package name using the command-line option "--package":
+
+~~~
+./srcml-to-mse.py <filename.xml.bz2> --package <package name>
+~~~
+
 ### Dependencies
 
 Requires Python 3 and `lxml` to be installed.  Or, if you are using a

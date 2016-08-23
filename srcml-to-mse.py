@@ -36,6 +36,14 @@ else:
         bzext = ''
     output_filename += '.mse' + bzext
 
+package_name = 'Siconos'
+if len(sys.argv) >= 4:
+    if sys.argv[2] == '--package':
+        package_name = sys.argv[3]
+    else:
+        print('Unknown option "{}"'.format(sys.argv[2]))
+        sys.exit(1)
+
 print('Loading',input_filename,'...')
 tree = etree.parse(bz(input_filename))
 
@@ -309,7 +317,7 @@ invocations = []
 unresolved = []
 
 # Find interesting parts of the SrcML XML
-siconos = Package('Siconos')
+siconos = Package(package_name)
 nodes.append(siconos)
 
 for unit in tree.findall('//{*}unit'):
