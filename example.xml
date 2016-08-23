@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="0.9.5">
+
+<unit xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="0.9.5" language="C++" filename="example.cpp" hash="d61ec5a3030d8654a58aebadeaf8584c4bf8aba7">
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>"example.hpp"</cpp:file></cpp:include>
+
+<function><type><name>void</name></type> <name><name>MyClass</name><operator>::</operator><name>TestFunction</name></name><parameter_list>()</parameter_list>
+<block>{
+}</block></function>
+</unit>
+
+<unit xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="0.9.5" language="C++" filename="example.hpp" hash="d6bb497998b0e1d0138e588a17c456e33c202adb">
+<class>class <name>MyClass</name>
+<block>{<private type="default">
+</private><public>public:
+    <function_decl><type><name>void</name></type> <name>TestFunction</name><parameter_list>()</parameter_list>;</function_decl>
+</public>}</block>;</class>
+</unit>
+
+</unit>
