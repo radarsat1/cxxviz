@@ -62,7 +62,7 @@ setup(
 
     py_modules=['srcml-to-mse'],
 
-    install_requires=['future'],
+    install_requires=['future', 'lxml'],
 
     extras_require={
         'dev': ['check-manifest'],
