@@ -26,7 +26,16 @@ output after running SrcML, but you don't have to.)
 
 ### Dependencies
 
-Requires Python 3 and `lxml` to be installed.
+Requires Python 3 and `lxml` to be installed.  Or, if you are using a
+default Mac install and don't want to install a custom Python, the
+following should work:
+
+~~~
+$ easy_install --upgrade --user .
+~~~
+
+This should read `setup.py` and install the `lxml` and `future`
+packages for you.
 
 # Author
 
