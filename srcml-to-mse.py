@@ -44,6 +44,31 @@ if len(sys.argv) >= 4:
         print('Unknown option "{}"'.format(sys.argv[2]))
         sys.exit(1)
 
+def load_touch_times(fn):
+    try:
+        import json
+        print('Loading touch times from',touch_filename)
+        times = json.load(open(touch_filename))
+        def get_time(f):
+            if f in times:
+                return int(times[f])
+            else:
+                return None
+        return get_time
+    except:
+        print('Error loading',touch_filename)
+        sys.exit(1)
+
+touch_filename = None
+touch_time = lambda f: None
+if len(sys.argv) >= 6:
+    if sys.argv[4] == '--touch':
+        touch_filename = sys.argv[5]
+        touch_time = load_touch_times(touch_filename)
+    else:
+        print('Unknown option "{}"'.format(sys.argv[4]))
+        sys.exit(1)
+
 print('Loading',input_filename,'...')
 tree = etree.parse(bz(input_filename))
 
@@ -131,14 +156,18 @@ class CompilationUnit(Node):
         self.filename = os.path.split(filepath)[1]
         self.language = lang
         self.includes = []
+        self.touchtime = touch_time(filepath)
     def add_include(self, header):
         i = Include(self, header)
         self.includes.append(i)
         nodes.append(i)
     def mse_attribs(self):
-        return [('filepath', mseString(self.filepath)),
-                ('name', mseString(self.filename)),
-                ('language', mseString(self.language))]
+        result = [('filepath', mseString(self.filepath)),
+                  ('name', mseString(self.filename)),
+                  ('language', mseString(self.language))]
+        if self.touchtime is not None:
+            result.append(('touchCompileTime', self.touchtime))
+        return result
 
 class Header(Node):
     def __init__(self, filepath, lang):
@@ -147,14 +176,18 @@ class Header(Node):
         self.filename = os.path.split(filepath)[1]
         self.language = lang
         self.includes = []
+        self.touchtime = touch_time(filepath)
     def add_include(self, header):
         i = Include(self, header)
         self.includes.append(i)
         nodes.append(i)
     def mse_attribs(self):
-        return [('filepath', mseString(self.filepath)),
-                ('name', mseString(self.filename)),
-                ('language', mseString(self.language))]
+        result = [('filepath', mseString(self.filepath)),
+                  ('name', mseString(self.filename)),
+                  ('language', mseString(self.language))]
+        if self.touchtime is not None:
+            result.append(('touchCompileTime', self.touchtime))
+        return result
 
 class Include(Node):
     def __init__(self, includingfile, includedfile):
