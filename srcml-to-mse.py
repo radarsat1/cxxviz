@@ -568,7 +568,7 @@ if calls:
 print('Found',len(invocations),'invocations')
 
 # Print MSE to output file
-output_file = bz(output_filename, 'w')
+output_file = bz(output_filename, 'wb')
 output_file.write(bytes(u'(\n', 'UTF-8'))
 for n in nodes:
     output_file.write(bytes(n.to_mse(), 'UTF-8'))
