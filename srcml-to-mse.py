@@ -415,7 +415,7 @@ for cl in tree.findall('//{*}class'):
             signature = make_signature(name, args, ty)
             node.add_method(name.xpath('string()'),
                             signature,
-                            ty.xpath('string()'))
+                            ty.xpath('string()') if ty else None)
     if decls:
         for d in decls:
             typename = None
