@@ -474,7 +474,6 @@ if funcs:
             tyname = ty.xpath('string()')
         else:
             tyname = None
-        node.add_sourceUnitXML(func)
         signature = make_signature(name, args, ty, removeQuote=True)
         if signature not in functions:
             functions[signature] = Function(name.xpath('string()'),
