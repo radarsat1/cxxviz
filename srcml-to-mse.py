@@ -398,7 +398,18 @@ print('Resolved',n_includes,'includes')
 print('Could not resolved',n_unresolved_includes,'includes (probably external libs)')
 
 for cl in tree.findall('//{*}class'):
+    p = cl.getparent()
+    language = None
+    while p is not None:
+        if 'language' in p.attrib:
+            language = p.attrib['language']
+            break
+        p = p.getparent()
+    if language not in ('C', 'C++'):
+        continue
     classname = cl.find('{*}name')
+    if classname == None:
+        continue
     node = Class(siconos, classname.text)
     supers = cl.findall('./{*}super/{*}name')
     decls = cl.findall('.//{*}decl/{*}name')
@@ -516,6 +527,16 @@ if calls:
                                        if x.name == methname), None)
                         sender = method
         elif func is not None:
+
+            p = func
+            while p is not None:
+                if 'language' in p.attrib:
+                    language = p.attrib['language']
+                    break
+                p = p.getparent()
+            if language not in ('C','C++'):
+                continue
+
             # In a function implementation: If implementation of a
             # method, find the class and sender is the method.
             # Otherwise, sender is the function, if found.
